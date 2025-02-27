@@ -3,17 +3,20 @@ import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Home/Home";
 import LoginSignUp from "./Components/LoginSignUp/LoginSignUp";
 import ReportLostItem from "./Components/Report/ReportLostItem";
+import { AppProvider } from "./Components/Context/Context"; // Importing Context Provider
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/" element={<LoginSignUp />} />
-        <Route path="/report-lost-item" element={<ReportLostItem />} />
-      </Routes>
-    </Router>
+    <AppProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<LoginSignUp />} />
+          <Route path="/report-lost-item" element={<ReportLostItem />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </Router>
+    </AppProvider>
   );
 }
 

@@ -1,7 +1,6 @@
 package com.example.aryan.Service;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.aryan.Model.LostItem;
@@ -21,8 +20,8 @@ public class LostItemService {
         return lostItemRepository.findAll();
     }
 
-    public Optional<LostItem> getLostItemById(Integer id) {
-        return lostItemRepository.findById(id);
+    public LostItem getLostItemById(Integer id) {
+        return lostItemRepository.findById(id).orElse(null);
     }
 
     public void deleteLostItem(Integer id) {

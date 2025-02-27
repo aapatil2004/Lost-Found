@@ -5,8 +5,9 @@ import { useState } from "react";
 import password from "../Assets/password.png";
 import email from "../Assets/email.png";
 import person from "../Assets/person.png";
-
+import { useNavigate } from "react-router-dom";
 const LoginSignUp = () => {
+  const navigate = useNavigate();
   const [action, setAction] = useState("Sign Up");
   const [state, setState] = React.useState({
     username: "",
@@ -36,11 +37,14 @@ const LoginSignUp = () => {
 
       if (response.status == 200) {
         alert("SignUp Successfull");
+
         setState({
           username: "",
           email: "",
           password: "",
         });
+
+        // navigate("/login");
       }
     } catch (error) {
       alert("SignUp Failed. Please try again");
@@ -69,6 +73,8 @@ const LoginSignUp = () => {
       if (response.ok) {
         alert("Login successful!");
       }
+
+      navigate("/home");
     } catch (error) {
       alert("Either Password or email is wrong.");
     }

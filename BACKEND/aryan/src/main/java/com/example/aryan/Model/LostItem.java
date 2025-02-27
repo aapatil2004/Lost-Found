@@ -62,12 +62,12 @@ public class LostItem {
 
     @Column(name = "image_data", columnDefinition = "LONGBLOB")
     @Lob // Store image as large binary data
-    private byte[] imageData;
+    private byte[] imageDate;
 
     public void setImage(byte[] bytes) {
         if (bytes == null || bytes.length == 0) {
             throw new IllegalArgumentException("Image data must not be null or empty.");
         }
-        this.imageData = bytes;
+        this.imageDate = bytes;
     }
 }

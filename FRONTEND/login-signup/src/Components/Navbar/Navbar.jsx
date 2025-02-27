@@ -10,7 +10,7 @@ const Navbar = () => {
         Logo
       </a>
       <nav className="navbar">
-        <a href="/">Home</a>
+        <a href="/home">Home</a>
 
         {/* Dropdown Menu */}
         <div

@@ -1,8 +1,8 @@
 package com.example.aryan.Controller;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +16,11 @@ public class LostItemController {
 
     @Autowired
     private LostItemService lostItemService;
+
+    @RequestMapping("/lostitems")
+    public ResponseEntity<List<LostItem>> getAllLostItems() {
+        return new ResponseEntity<>(lostItemService.getAllLostItems(), HttpStatus.OK);
+    }
 
     // Report a Lost Item (with Image Upload)
     @PostMapping("/lost-item")
@@ -34,18 +39,25 @@ public class LostItemController {
         }
     }
 
-    // Get All Lost Items
-    @GetMapping("/all")
-    public ResponseEntity<List<LostItem>> getAllLostItems() {
-        return ResponseEntity.ok(lostItemService.getAllLostItems());
+    // Get Lost Item by ID
+    @GetMapping("/lostitem/{id}")
+    public ResponseEntity<LostItem> getLostItemById(@PathVariable int id) {
+        LostItem lostitem = lostItemService.getLostItemById(id);
+        if (lostitem != null) {
+            return new ResponseEntity<>(lostitem, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(lostitem, HttpStatus.NOT_FOUND);
+        }
     }
 
-    // Get Lost Item by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getLostItemById(@PathVariable Integer id) {
-        Optional<LostItem> lostItem = lostItemService.getLostItemById(id);
-        return lostItem.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/lostitem/{lostitemId}/image")
+    public ResponseEntity<byte[]> getImageByLostItemId(@PathVariable int lostitemId) {
+        LostItem lostitem = lostItemService.getLostItemById(lostitemId);
+        if (lostitem != null && lostitem.getImageDate() != null) {
+            return ResponseEntity.ok().body(lostitem.getImageDate());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // Delete Lost Item
