@@ -132,21 +132,6 @@ const Home = () => {
                     {timeLost && `at ${timeLost}`})
                   </p>
                   <p className="text-gray-600">
-                    <strong>Color:</strong> {color}
-                  </p>
-                  <p className="text-gray-600">
-                    <strong>Brand/Model:</strong> {brandModel || "N/A"}
-                  </p>
-                  <p className="text-gray-600">
-                    <strong>Identifiers:</strong> {specialIdentifiers || "N/A"}
-                  </p>
-                  <p className="text-gray-600">
-                    <strong>Description:</strong> {description}
-                  </p>
-                  <p className="text-gray-600">
-                    <strong>Reported By:</strong> {fullName}
-                  </p>
-                  <p className="text-gray-600">
                     <strong>Contact:</strong> {phoneNumber} | {email}
                   </p>
                 </div>

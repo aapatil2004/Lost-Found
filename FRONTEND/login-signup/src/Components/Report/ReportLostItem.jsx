@@ -87,7 +87,7 @@ const ReportLostItem = () => {
               <option value="Documents">Documents</option>
               <option value="Accessories">Accessories</option>
               <option value="Clothing">Clothing</option>
-              <option value="Others">Others</option>
+              <option value="Others">Human</option>
             </select>
           </div>
 
