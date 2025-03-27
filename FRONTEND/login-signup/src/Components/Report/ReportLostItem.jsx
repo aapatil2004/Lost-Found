@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import "./ReportLostItem.css";
+import AppContext from "../Context/Context";
 const ReportLostItem = () => {
+  const {refreshLostData} = useContext(AppContext)
   const [lostItem, setLostItem] = useState({
     itemName: "",
     category: "",
@@ -44,6 +46,7 @@ const ReportLostItem = () => {
       })
       .then((response) => {
         console.log("Lost item reported successfully:", response.data);
+        refreshLostData()
         alert("Lost item reported successfully");
       })
       .catch((error) => {

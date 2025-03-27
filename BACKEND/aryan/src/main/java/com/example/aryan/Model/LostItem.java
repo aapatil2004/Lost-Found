@@ -64,6 +64,9 @@ public class LostItem {
     @Lob // Store image as large binary data
     private byte[] imageDate;
 
+    @Column(name = "is_resolved", nullable = false)
+    private boolean isResolved = false;
+
     public void setImage(byte[] bytes) {
         if (bytes == null || bytes.length == 0) {
             throw new IllegalArgumentException("Image data must not be null or empty.");
