@@ -1,189 +1,4 @@
-//import React, { useContext, useEffect, useState } from "react";
-//import { Link } from "react-router-dom";
-//import AppContext from "../Context/Context";
-
-//const Home = () => {
-//  const {
-//    lostData,
-//    foundData,
-//    isLostError,
-//    isFoundError,
-//    refreshLostData,
-//    refreshFoundData,
-//  } = useContext(AppContext);
-
-//  const [activeTab, setActiveTab] = useState("lost");
-
-//  useEffect(() => {
-//    console.log("was here")
-//    refreshLostData();
-//    refreshFoundData();
-//  }, [refreshLostData, refreshFoundData]);
-
-//  if (isLostError || isFoundError) {
-//    return (
-//      <h2 className="text-center" style={{ padding: "18rem" }}>
-//        Error loading data...
-//      </h2>
-//    );
-//  }
-
-//  const itemsToDisplay = activeTab === "lost" ? lostData : foundData;
-
-//  return (
-//    <div>
-//      {/* Tabs for Lost and Found Items */}
-//      <div
-//        className="tabs"
-//        style={{
-//          display: "flex",
-//          justifyContent: "center",
-//          marginTop: "86px",
-//          marginBottom: "20px",
-//        }}
-//      >
-//        <button
-//          onClick={() => setActiveTab("lost")}
-//          style={{
-//            padding: "10px 20px",
-//            marginRight: "10px",
-//            cursor: "pointer",
-//            backgroundColor: activeTab === "lost" ? "#007bff" : "#f8f9fa",
-//            color: activeTab === "lost" ? "white" : "black",
-//            border: "1px solid #007bff",
-//            borderRadius: "5px",
-//          }}
-//        >
-//          Lost Items
-//        </button>
-//        <button
-//          onClick={() => setActiveTab("found")}
-//          style={{
-//            padding: "10px 20px",
-//            cursor: "pointer",
-//            backgroundColor: activeTab === "found" ? "#007bff" : "#f8f9fa",
-//            color: activeTab === "found" ? "white" : "black",
-//            border: "1px solid #007bff",
-//            borderRadius: "5px",
-//          }}
-//        >
-//          Found Items
-//        </button>
-//      </div>
-
-//      {/* Item Cards */}
-//      <div
-//        className="grid"
-//        style={{
-//          marginTop: "64px",
-//          display: "grid",
-//          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-//          gap: "20px",
-//          padding: "20px",
-//        }}
-//      >
-//        {itemsToDisplay.length === 0 ? (
-//          <h2 className="text-center" style={{ textAlign: "center" }}>
-//            No {activeTab === "lost" ? "lost" : "found"} items available
-//          </h2>
-//        ) : (
-//          itemsToDisplay.map((item) => {
-//            const {
-//              id,
-//              itemName,
-//              category,
-//              locationLost,
-//              dateLost,
-//              timeLost,
-//              color,
-//              brandModel,
-//              specialIdentifiers,
-//              description,
-//              fullName,
-//              phoneNumber,
-//              email,
-//              imageUrl,
-//            } = item;
-
-//            return (
-//              <div
-//                className="card mb-3"
-//                style={{
-//                  width: "250px",
-//                  height: "auto",
-//                  boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-//                  borderRadius: "10px",
-//                  overflow: "hidden",
-//                  backgroundColor: "#fff",
-//                  display: "flex",
-//                  flexDirection: "column",
-//                }}
-//                key={id}
-//              >
-//                <Link
-//                  to={`/${activeTab === "lost" ? "lostitem" : "founditem"}/${id}`}
-//                  style={{ textDecoration: "none", color: "inherit" }}
-//                >
-//                  <img
-//                    src={imageUrl}
-//                    alt={itemName}
-//                    style={{
-//                      width: "100%",
-//                      height: "150px",
-//                      objectFit: "cover",
-//                      padding: "5px",
-//                      margin: "0",
-//                      borderRadius: "10px 10px 0 0",
-//                    }}
-//                  />
-//                  <div
-//                    className="card-body"
-//                    style={{
-//                      padding: "10px",
-//                    }}
-//                  >
-//                    <h5 className="card-title" style={{ fontSize: "1.2rem" }}>
-//                      {itemName.toUpperCase()}
-//                    </h5>
-//                    <p className="text-gray-600">
-//                      <strong>Category:</strong> {category}
-//                    </p>
-//                    <p className="text-gray-600">
-//                      <strong>Lost At:</strong> {locationLost} ({dateLost}{" "}
-//                      {timeLost && `at ${timeLost}`})
-//                    </p>
-//                    <p className="text-gray-600">
-//                      <strong>Color:</strong> {color}
-//                    </p>
-//                    <p className="text-gray-600">
-//                      <strong>Brand/Model:</strong> {brandModel || "N/A"}
-//                    </p>
-//                    <p className="text-gray-600">
-//                      <strong>Identifiers:</strong> {specialIdentifiers || "N/A"}
-//                    </p>
-//                    <p className="text-gray-600">
-//                      <strong>Description:</strong> {description}
-//                    </p>
-//                    <p className="text-gray-600">
-//                      <strong>Reported By:</strong> {fullName}
-//                    </p>
-//                    <p className="text-gray-600">
-//                      <strong>Contact:</strong> {phoneNumber} | {email}
-//                    </p>
-//                  </div>
-//                </Link>
-//              </div>
-//            );
-//          })
-//        )}
-//      </div>
-//    </div>
-//  );
-//};
-
-//export default Home;
-
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { 
   MapPin, 
@@ -212,7 +27,7 @@ const Home = () => {
   } = useContext(AppContext);
 
   const [activeTab, setActiveTab] = useState("lost");
-
+  const sliderRef = useRef(null)
   useEffect(() => {
     refreshLostData();
     refreshFoundData();
@@ -225,7 +40,28 @@ const Home = () => {
       </div>
     );
   }
-
+  const handleSwipe = (direction) => {
+    if (!sliderRef.current) return;
+    
+    if (direction === "left") {
+      sliderRef.current.slickNext(); 
+    } else if (direction === "right") {
+      sliderRef.current.slickPrev(); 
+    }
+  };
+  const handleHorizontalScroll = (e) => {
+    const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+    
+    if (isHorizontalScroll) {
+      e.preventDefault();
+      
+      if (e.deltaX > 0) {
+        sliderRef.current.slickNext();
+      } else {
+        sliderRef.current.slickPrev();
+      }
+    }
+  };
   // Carousel settings
   const carouselSettings = {
     dots: true,
@@ -311,8 +147,8 @@ const Home = () => {
           </button>
         </div>
 
-        <div className="items-carousel">
-          <Slider {...carouselSettings}>
+        <div className="items-carousel" onWheel={handleHorizontalScroll}>
+          <Slider ref={sliderRef} {...carouselSettings} onSwipe={handleSwipe}>
             {(activeTab === "lost" ? lostData : foundData).map((item) => (
               <div key={item.id} className="carousel-item">
                 <Link 

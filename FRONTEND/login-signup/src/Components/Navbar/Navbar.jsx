@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../redux/authSlice";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileReportOpen, setIsMobileReportOpen] = useState(false);
-
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     // Close report dropdown when main menu is toggled
@@ -47,29 +50,50 @@ const Navbar = () => {
           </span>
           <ul className="dropdown-content">
             <li>
-              <Link 
+              {isAuthenticated ? (
+                <Link 
                 to="/report-lost-item" 
                 className="dropdown-link"
                 onClick={toggleMobileMenu}
               >
                 Lost Item
               </Link>
+              ):(
+                <Link 
+                to="/" 
+                className="dropdown-link"
+                onClick={toggleMobileMenu}
+              >
+                Lost Item
+              </Link>
+              )}
             </li>
             <li>
-              <Link 
+              {isAuthenticated ? (
+                <Link 
                 to="/report-found-item" 
                 className="dropdown-link"
                 onClick={toggleMobileMenu}
               >
                 Found Item
               </Link>
+              ):(
+                <Link 
+                to="/" 
+                className="dropdown-link"
+                onClick={toggleMobileMenu}
+              >
+                Found Item
+              </Link>
+              )}
             </li>
           </ul>
         </div>
 
-        <Link to="/browse" className="nav-link" onClick={toggleMobileMenu}>Browse</Link>
-        <Link to="/my-reports" className="nav-link" onClick={toggleMobileMenu}>My Reports</Link>
-        <Link to="/logout" className="nav-link" onClick={toggleMobileMenu}>Log Out</Link>
+        {isAuthenticated ? (<Link to="/browse" className="nav-link" onClick={toggleMobileMenu}>Browse</Link>) :
+        (<Link to="/" className="nav-link" onClick={toggleMobileMenu}>Browse</Link>)}
+        {isAuthenticated ? (<Link to="/my-reports" className="nav-link" onClick={toggleMobileMenu}>My Reports</Link>) : (<Link to="/" className="nav-link" onClick={toggleMobileMenu}>My Reports</Link>)}
+        {isAuthenticated ? ( <Link to="/logout" className="nav-link" onClick={()=>dispatch(logout())}>Log Out</Link>):( <Link to="/" className="nav-link" onClick={toggleMobileMenu}>Log In</Link>)}
       </nav>
     </header>
   );

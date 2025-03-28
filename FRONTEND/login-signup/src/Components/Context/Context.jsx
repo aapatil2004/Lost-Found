@@ -72,6 +72,7 @@ export const AppProvider = ({ children }) => {
 
   
   useEffect(() => {
+    console.log("hello")
     refreshLostData();
     refreshFoundData();
   }, [refreshLostData, refreshFoundData]);
