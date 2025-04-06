@@ -7,6 +7,8 @@
   font-family: "Poppins", sans-serif;
 }
 
+
+
 .report-container {
   max-width: 600px;
   margin: 80px auto;
@@ -41,13 +43,13 @@ textarea {
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 20px;
   outline: none;
 }
 
 textarea {
   resize: none;
-  height: 100px;
+  height: 120px;
 }
 
 input[type="file"] {
@@ -77,3 +79,63 @@ input[type="file"] {
     padding: 20px;
   }
 }
+
+.lost-page {
+  background-image: url('../Assets/lost_lost.png');
+  /* Path from public folder */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-container {
+  background: rgba(255, 255, 255, 0.8); /* Light background for form */
+  padding: 20px;
+  border-radius: 10px;
+}
+.found-page {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Ensures full-page height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Prevents form from being too squeezed on small screens */
+}
+.container {
+  width: 25%; /* Adjust this as needed */
+  background: rgba(255, 255, 255, 0.8); /* Light background for contrast */
+  padding: 10px;
+  border-radius: 10px; /* Optional for nice edges */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
+}
+
+.center-container {
+  width: 100%; /* Adjust this as needed */
+  background: rgba(255, 255, 255, 0.8); /* Light background for contrast */
+  padding: 20px;
+  border-radius: 10px; /* Optional for nice edges */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
+}
+
+.time-input {
+  position: relative;
+}
+
+.time-input input {
+  padding-right: 35px; /* Space for icon */
+}
+
+.clock-icon {
+  position: absolute;
+  right: 10px;
+  top: 62%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  pointer-events: none; /* Prevents interaction */
+}
+
